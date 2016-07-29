@@ -33,17 +33,12 @@
     <div class="container">
         <h2 id="title">{{title}}</h2>
         <p>{{description}}</p>
-          <p>{{comments}}</p>
-        {{#each comments}}
-      	 {{>comment_item}}
-      	{{/each}}
+          {{#each comments}}
+              <p>{{.}}</p>
+          {{/each}}
         <br />
         <div id="website_details_form">
       		<form class="js-save-details-form">
-      		  <div class="form-group">
-      		    <label for="name">Your name</label>
-      		    <input type="text" class="form-control" id="name" placeholder="Test user">
-      		  </div>
       		  <div class="form-group">
       		    <label for="comment">Comment</label>
       		    <input type="text" class="form-control" id="comment" placeholder="comment">

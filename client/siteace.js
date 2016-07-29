@@ -93,6 +93,7 @@ Router.route('/detail/:_id', function () {
 					description:description,
 					upvote:0,
 					downvote:0,
+					comments:["Test comment1", "test comment2"],
 					createdOn:new Date()
 				});
 
@@ -113,15 +114,16 @@ Router.route('/detail/:_id', function () {
 			// here is an example of how to get the url out of the form:
 			var name = event.target.name.value;
 			var comment = event.target.comment.value;
-			var title = event.target.title.value;
+			console.log("comment..." + comment);
 
-				console.log("comment..." + comment);
+			var websiteId = this._id;
+			console.log(websiteId);
 
-			  //var website_id = event.target.id_number.value;
-					//console.log("website_id..." + website_id);
+			var website = Websites.findOne({_id:websiteId});
+			console.log(website.comments);
 
-				///Websites.update({_id:website_id},
-          ///      {$set: {comments:["2", "2"]}});
+			Websites.update({_id:websiteId},
+              {"$addToSet": {comments:comment}});
 
 			//  put your website saving code in here!
 
