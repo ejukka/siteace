@@ -1,0 +1,136 @@
+<head>
+  <title>siteace</title>
+</head>
+
+<body>
+
+</body>
+
+<template name="ApplicationLayout">
+  {{> yield "main"}}
+</template>
+
+<template name="websites">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          {{> navbar}}
+          Site Ace
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {{> website_form}}
+    {{> website_list}}
+  </div>
+</template>
+
+
+<template name="website_details_form">
+    <div class="container">
+        <h2 id="title">{{title}}</h2>
+        <p>{{description}}</p>
+          <p>{{comments}}</p>
+        {{#each comments}}
+      	 {{>comment_item}}
+      	{{/each}}
+        <br />
+        <div id="website_details_form">
+      		<form class="js-save-details-form">
+      		  <div class="form-group">
+      		    <label for="name">Your name</label>
+      		    <input type="text" class="form-control" id="name" placeholder="Test user">
+      		  </div>
+      		  <div class="form-group">
+      		    <label for="comment">Comment</label>
+      		    <input type="text" class="form-control" id="comment" placeholder="comment">
+      		  </div>
+
+      		  <button type="submit" class="btn btn-default js-save-details-form">Submit feedback</button>
+      		</form>
+      	</div>
+    </div>
+  </template>
+
+  <template name="comment_item">
+    <p id="comment">
+      Comment: {{comments}}
+    </p>
+  </template>
+
+
+<template name="navbar">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+   {{> loginButtons}}
+  </div>
+</nav>
+</template>
+
+
+<template name="website_form">
+	<a class="btn btn-default js-toggle-website-form" href="#">
+  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	</a>
+	<div id="website_form" class="hidden_div">
+		<form class="js-save-website-form">
+		  <div class="form-group">
+		    <label for="url">Site address</label>
+		    <input type="text" class="form-control" id="url" placeholder="http://www.mysite.com">
+		  </div>
+		  <div class="form-group">
+		    <label for="title">Title</label>
+		    <input type="text" class="form-control" id="title" placeholder="Mysite">
+		  </div>
+		    <div class="form-group">
+		    <label for="description">Description</label>
+		    <input type="text" class="form-control" id="description" placeholder="I found this site really useful for ...">
+		  </div>
+
+		  <button type="submit" class="btn btn-default js-save-website-form">Submit</button>
+		</form>
+	</div>
+</template>
+
+<!-- template that displays several website items -->
+<template name="website_list">
+	<ol>
+	{{#each websites}}
+	{{>website_item}}
+	{{/each}}
+	</ol>
+</template>
+
+<!-- template that displays individual website entries -->
+<template name="website_item">
+<li>
+	<a href="{{url}}">{{title}}</a>
+	<p>
+		{{description}}
+	</p>
+  <p id="upvote">
+    Up votes: {{upvote}}
+  </p>
+  <p id="downvote">
+    Down votes: {{downvote}}
+  </p>
+  <p>
+    Created: {{createdOn}}
+  </p>
+  <p>
+    <a href="/detail/{{_id}}" class="btn btn-success">Details</a>
+  </p>
+  <br />
+
+	<a href="#" class="btn btn-default js-upvote">
+		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+	</a>
+	<a href="#" class="btn btn-default js-downvote">
+		<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+	</a>
+	<!-- you will be putting your up and down vote buttons in here! -->
+</li>
+</template>
